@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Solanki Visions Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <link rel="icon" href="favicom.png" type="image/png">
+
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --bg-color: #0a0a0a;
+            --card-bg: #111111;
+            --cyan: #00f3ff;
+            --green: #39ff14;
+            --purple: #bc13fe;
+            --yellow: #fefe33;
+            --white: #ffffff;
+            --font-head: 'Orbitron', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--white);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 {
+            font-family: var(--font-head);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            font-family: var(--font-head);
+            font-weight: 700;
+            cursor: pointer;
+            border: 2px solid;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+
+        /* --- STICKY NAVIGATION --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 15px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .logo-text {
+            color: var(--yellow);
+            font-family: var(--font-head);
+            font-weight: 900;
+            font-size: 1.2rem;
+            text-shadow: 0 0 5px rgba(254, 254, 51, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-family: var(--font-head);
+            font-size: 0.9rem;
+            color: var(--white);
+        }
+
+        .nav-links a:hover {
+            color: var(--cyan);
+            text-shadow: 0 0 8px var(--cyan);
+        }
+
+        .cta-btn {
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+
+        .cta-btn:hover {
+            background: var(--cyan);
+            color: var(--bg-color);
+            box-shadow: 0 0 20px var(--cyan);
+        }
+
+        /* --- HERO SECTION --- */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 70%);
+            padding-top: 80px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #fff, #aaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sub-headline {
+            color: var(--cyan);
+            font-family: var(--font-head);
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.4);
+        }
+
+        /* --- ABOUT SECTION --- */
+        #about {
+            padding: 100px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--purple);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--purple);
+            box-shadow: 0 10px 30px rgba(188, 19, 254, 0.2);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card h3 {
+            color: var(--cyan);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        /* --- GAMES / FEATURED PROJECT SECTION --- */
+        #games {
+            padding: 100px 0;
+            background: linear-gradient(180deg, var(--bg-color), #0f0f0f);
+        }
+
+        .split-screen {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            border: 1px solid var(--green);
+            padding: 30px;
+            background: rgba(57, 255, 20, 0.02);
+        }
+
+        .project-img {
+            flex: 1;
+            width: 100%;
+            height: auto;
+            border: 1px solid #333;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            /* Placeholder styling if image fails */
+            min-height: 300px;
+            background-color: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+        }
+        
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .project-info {
+            flex: 1;
+        }
+
+        .project-info h3 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .project-info p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            color: #ccc;
+        }
+
+        .play-btn {
+            border-color: var(--green);
+            color: var(--green);
+        }
+
+        .play-btn:hover {
+            background: var(--green);
+            color: #000;
+            box-shadow: 0 0 25px var(--green);
+        }
+
+        /* --- CONTACT SECTION --- */
+        #contact {
+            padding: 100px 0;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .contact-card {
+            text-align: center;
+            padding: 50px;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+        }
+
+        .contact-card:hover {
+            border-color: var(--cyan);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.15);
+        }
+
+        .contact-card h3 {
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .social-btn {
+            padding: 10px 20px;
+            border: 1px solid var(--purple);
+            color: var(--purple);
+            font-family: var(--font-head);
+            font-size: 0.9rem;
+        }
+
+        .social-btn:hover {
+            background: var(--purple);
+            color: #fff;
+            box-shadow: 0 0 15px var(--purple);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-logo {
+            width: 30px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+            margin: 20px 0;
+        }
+
+        .footer-links a {
+            color: var(--yellow);
+            font-family: var(--font-head);
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            text-shadow: 0 0 10px var(--yellow);
+        }
+
+        .copyright {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+                padding: 0 10px;
+            }
+
+            .split-screen {
+                flex-direction: column;
+            }
+
+            .grid-3, .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <img src="favicom.png" alt="SVS Logo">
+                <span class="logo-text">THE SOLANKI VISIONS</span>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#games">Games</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="https://forms.gle/dW4QTRT5F4jbZHky6" target="_blank" class="btn cta-btn">Apply Now</a>
+        </div>
+    </header>
+
+    <section id="hero">
+        <div class="container hero-content">
+            <h1>THE SOLANKI VISIONS STUDIO</h1>
+            <p class="sub-headline">EST. JANUARY 2026 | JODHPUR, RAJASTHAN</p>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">Who We Are</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>Leadership</h3>
+                    <p>Founded by Jankilal Solanki, a visionary CEO driving the future of mobile gaming from the heart of Rajasthan.</p>
+                </div>
+                <div class="card">
+                    <h3>Technology Stack</h3>
+                    <p>We leverage cutting-edge tools including Unity 3D, Blender, C#, and advanced AI integration to build immersive worlds.</p>
+                </div>
+                <div class="card">
+                    <h3>Our Vision</h3>
+                    <p>Committed to uplifting the Indie Game culture in India and creating digital experiences with genuine social impact.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="games">
+        <div class="container">
+            <h2 class="section-title">Active Project</h2>
+            <div class="split-screen">
+                <div class="project-img">
+                    <img src="Annotation 2026-01-22 230108.png" alt="Falling Boxes Gameplay">
+                </div>
+                <div class="project-info">
+                    <h3>FALLING BOXES</h3>
+                    <p>Experience physics-based chaos in our latest release. Test your reflexes and strategy in this fast-paced arcade challenge.</p>
+                    <a href="https://thejankilal.github.io/Falling-Boxes/" target="_blank" class="btn play-btn">Play Project</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Connect With Us</h2>
+            <div class="grid-2">
+                <div class="contact-card">
+                    <h3>Headquarters</h3>
+                    <p>Jodhpur, Rajasthan</p>
+                    <p style="color: var(--cyan); margin-top: 10px; font-weight: bold;">India</p>
+                </div>
+                <div class="contact-card">
+                    <h3>Social Media</h3>
+                    <div class="social-buttons">
+                        <a href="#" class="social-btn">LinkedIn</a>
+                        <a href="#" class="social-btn">YouTube</a>
+                        <a href="mailto:contact@solankivisions.com" class="social-btn">Gmail</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <img src="favicom.png" alt="Logo" class="footer-logo">
+            <div class="footer-links">
+                <a href="https://thesolankivitions.github.io/Company-Terms-and-Policy/" target="_blank">Terms & Policy</a>
+            </div>
+            <p class="copyright">&copy; 2026 The Solanki Visions Studio. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
